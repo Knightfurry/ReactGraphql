@@ -9,7 +9,7 @@ const testClient = new ApolloClient({
   cache: new InMemoryCache(),
   // Authorization token created from https://github.com/settings/tokens.
   headers: {
-    'Authorization': 'bearer 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'
+    'Authorization': `bearer ${process.env.REACT_APP_API_KEY}`
   }
 });
 

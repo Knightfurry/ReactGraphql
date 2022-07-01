@@ -3,6 +3,8 @@ import cloneDeep from "lodash/cloneDeep";
 import throttle from "lodash/throttle";
 import Pagination from "rc-pagination";
 import "rc-pagination/assets/index.css";
+import {tableData} from "./common/TableBody";
+import {HeadRow} from "./common/TableHeader";
 
 const tableHeader = {
   name: "Name",
@@ -58,29 +60,6 @@ export default function Table (props: any){
     const from = to - countPerPage;
     setDataPerpage(cloneDeep(props.tableData.slice(from, to)));
   };
- /*
-   create table row.
-  */
-  const tableRows = (rowData: { key: any; index: any; }) => {
-    const { key, index } = rowData;
-    const tableCell = Object.keys(tableHeader);
-    const columnData = tableCell.map((keyD, i) => {
-      if(keyD==='name')
-      return <td key={i} ><a href={key.url} target={"_blank"} rel="noreferrer">{key[keyD]}</a></td>;
-      return <td key={i}>{key[keyD]}</td>;
-    });
-    return <tr key={index}>{columnData}</tr>;
-  };
-  // Create table data.
-  const tableData = () => {
-    return dataPerPage.map((key: any, index: any) => tableRows({ key, index }));
-  };
-  // craete row header.
-  const headRow = () => {
-    return Object.values(tableHeader).map((title, index) => (
-      <td key={index}>{title}</td>
-    ));
-  };
 
   return (
     <>
@@ -94,9 +73,9 @@ export default function Table (props: any){
       {dataPerPage.length ? <div>
         <table>
         <thead>
-          <tr>{headRow()}</tr>
+          <tr>{HeadRow(tableHeader)}</tr>
         </thead>
-        <tbody className="trhover">{tableData()}</tbody>
+        <tbody className="trhover">{tableData(dataPerPage, tableHeader)}</tbody>
       </table>
       <Pagination
         pageSize={countPerPage}
