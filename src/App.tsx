@@ -1,30 +1,13 @@
 import React from 'react';
 import './App.css';
-import { gql, useQuery} from "@apollo/client";
+import { useQuery} from "@apollo/client";
 import Table from './Table';
+import {responseGql} from '../src/_helper/Ggl';
 
-
-//We can define the query we want to execute by wrapping it in the gql template litera.
-const response = gql`
-{
-  search(query: "facebook/react sort:created-asc", type: REPOSITORY, first: 100) {
-    repositoryCount
-    nodes {
-      ... on Repository {
-        name
-        description
-        updatedAt
-        createdAt
-        stargazerCount,
-        forkCount,
-        url
-      }
-    }
-  }
-}
-`;
 
 export default function App() {
+  const response = responseGql(60);
+  console.log('TEST', process.env.REACT_APP_API_KEY_SAMPLE);
   //The useQuery hook is a React hook that shares GraphQL data with UI.
   const { loading, error, data } = useQuery(response);
   // if loading is true then show loading message.
@@ -33,7 +16,7 @@ export default function App() {
   if (error) return <p>{error.message}</p>
   return (
     <>
-    <div>
+    <div className='container'>
      {!loading &&
      <Table
       tableData = {data.search.nodes}

@@ -7,6 +7,14 @@
   margin-top: 30px;
   color: #14877c;
 }
+.container {
+  font-family: sans-serif;
+}
+.bottomContainer {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
 .heading {
   color: #14877c;
   border-bottom: 1px solid #14877c;
@@ -82,4 +90,8 @@ button{
 .nodata{
   padding: 10px 10px 10px 0;
   color: red;
+}
+.pageCount {
+  font-family: sans-serif;
+  padding: 10px 10px 10px 0;
 }
