@@ -90,6 +90,7 @@ export default function Table (props: any){
 
   return (
     <>
+    <div id="tableContainer">
       <div className="search">
         <input 
           placeholder="Search owner by name"
@@ -124,6 +125,7 @@ export default function Table (props: any){
     </div>
       {/* when search results are empty */}
       </div>:<div className="nodata"> NO Data Available</div>}
+      </div>
     </>
   );
 };
